@@ -15,11 +15,8 @@ app.use(express.static(path.resolve(__dirname)));
 
 MongoClient.connect(envs.mongodb_uri, (err, db) => {
 
-    if(err) {
-        console.log(err);
-    } else {
-        console.log("Successfully connected to database...");
-    }
+    if(err) { console.log(err); }
+    else { console.log("Successfully connected to database..."); }
 
     router(app, db);
 
