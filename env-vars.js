@@ -1,5 +1,7 @@
 "use strict";
 module.exports = {
-    API_KEY: process.env.API_KEY,
-    CX_ID: process.env.CX_ID
+    api_key: process.env.API_KEY,
+    cx_id: process.env.CX_ID,
+    port: process.env.PORT,
+    mongodb_uri: process.env.MONGODB_URI
 };

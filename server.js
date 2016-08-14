@@ -3,29 +3,29 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
-
-const api = require('./handle-api');
+const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
 
+const envs = require('./env-vars');
+const router = require('./router');
+
+
 app.use(express.static(path.resolve(__dirname)));
 
-app.get('/', (req, res) => {
-    res.redirect('/imagesearch');
+MongoClient.connect(envs.mongodb_uri, (err, db) => {
+
+    if(err) {
+        console.log(err);
+    } else {
+        console.log("Successfully connected to database...");
+    }
+
+    router(app, db);
+
 });
 
-app.get('/imagesearch', (req, res) => {
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end('Image Search');
-});
-
-app.get('/imagesearch/:term', (req, res) => {
-    const query = Object.assign(req.params, req.query);
-    api.imageSearch(query.term).then(results => res.json(results));
-});
-
-
-const port = process.env.PORT || 8080;
+const port = envs.port || 8080;
 app.listen(port, () =>   {
 	console.log(`Node.js listening on port ${port}...`);
 });
