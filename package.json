@@ -9,9 +9,11 @@
   "author": "Jacek Janus",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.13.1",
     "express": "^4.14.0"
   },
   "devDependencies": {
+    "dotenv": "^2.0.0",
     "nodemon": "^1.10.0"
   }
 }
