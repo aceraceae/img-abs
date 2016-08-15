@@ -5,7 +5,7 @@ const url = `https://www.googleapis.com/customsearch/v1?key=${envs.api_key}&cx=$
 
 module.exports = {
  imageSearch({term, offset=''}) {
-    if(offset) {
+    if(parseInt(offset)) {
         offset = `&start=${offset}`;
     }
     return axios.get(`${url}${term}${offset}`)
