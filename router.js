@@ -18,12 +18,12 @@ module.exports = function(app, db) {
     app.get('/imagesearch/:term', (req, res) => {
         const query = Object.assign(req.query, req.params);
         const now = new Date();
-        
+
         col.insertOne({term: query.term, date: now, timestamp: now.getTime()}, (err, result) => {
             if(err) { console.log(err); }
         });
 
-        api.imageSearch(query.term, query.offset)
+        api.imageSearch(query)
         .then(results => res.json(results))
         .catch(err => console.log(err));
 

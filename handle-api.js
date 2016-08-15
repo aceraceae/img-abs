@@ -4,7 +4,7 @@ const envs = require('./env-vars');
 const url = `https://www.googleapis.com/customsearch/v1?key=${envs.api_key}&cx=${envs.cx_id}&searchType=image&q=`;
 
 module.exports = {
- imageSearch(term, offset='') {
+ imageSearch({term, offset=''}) {
     if(offset) {
         offset = `&start=${offset}`;
     }
@@ -13,7 +13,6 @@ module.exports = {
       .catch(err => console.log(err));
  }
 };
-
 
 function seekLinks({title, link, image: {contextLink, thumbnailLink}}) {
     return {title, link, contextLink, thumbnailLink};
